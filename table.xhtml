@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh">
+<head>
+    <title>表格美化</title>
+    <style type="text/css">
+        table{
+            border: 1px solid #8F0030;
+            border-bottom: 2px solid #8F0030;
+            border-top: 2px solid #8F0030;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            border-collapse: collapse;
+        }
+        th{
+            background: #FFFFFF;
+            border-left-color: #8F0030;
+            border-right-color: #8F0030;
+            border-bottom: 2px solid #8F0030;
+            border-bottom: 2px solid #8F0030;
+            font-size: large;
+            padding: 3px;
+            color: #2F0614;
+            font-family: 黑体;
+        }
+        td{
+            border-top-color: #8F0030;
+            border-bottom-color: #8F0030;
+            border-left-color: #8F0030;
+            border-right-color: #8F0030;
+            color: #2F0614;
+            padding: 3px;
+        }
+
+        /* 奇数行 */
+        tr.odd{
+            background: #ECBDCD;
+        }
+        /* 偶数行 */
+        tr.even{
+            background: #F1DCE1;
+        }
+        /* 鼠标移动 */
+        tr.mover{
+            background: #859EE0;
+            text-decoration: underline;
+        }
+        /* 鼠标点击 */
+        tr.click{
+            background: #D0234C;
+            font-weight: bold;
+        }
+
+    </style>
+    <script type="text/javascript">
+        /* 奇偶颜色交替，鼠标移动 */
+        function tableEvent() {
+            var trs = table.getElementsByTagName("tr");
+            var n = trs.length;
+            for (i=1; n>i; i++){
+                var tr = trs[i];
+                if(i % 2 === 0){
+                    tr.className = "even";
+                }else{
+                    tr.className = "odd";
+                }
+                tr.onmouseover = function () { this.className = 'mover'; };
+                tr.onmouseout = function () {
+                    this.className.replace('mover','');
+                    tableEvent();
+                };
+            }
+
+        }
+        /* 鼠标单击 */
+        function Click(table) {
+            var trs = table.getElementsByTagName("tr");
+            var n = trs.length;
+            for(i=1;n>i;i++){
+                var tr = trs[i];
+                tr.onclick = function () {
+                    // 还原样式
+                    for(j=0;n>j;j++){
+                        if(j%2===0)
+                            trs[j].className = "even";
+                        else
+                            trs[j].className = "odd";
+                    }
+                    this.className = "click";
+                }
+            }
+        }
+        /* 加载时调用 */
+        window.onload = function () {
+            var tables = document.getElementsByTagName("table");
+            tableEvent(tables[0]);
+            Click(tables[0]);
+        }
+    </script>
+</head>
+
+<body>
+
+<div style="text-align: center;">
+    <table id="table" width="500" border="1" align="center">
+        <tr>
+            <th scope="col">姓名</th>
+            <th scope="col">学号</th>
+            <th scope="col">性别</th>
+            <th scope="col">年龄</th>
+            <th scope="col">联系方式</th>
+            <th scope="col">家庭住址</th>
+        </tr>
+        <tr>
+            <td align="center">张三</td>
+            <td align="center">20100001</td>
+            <td align="center">女</td>
+            <td align="center">22</td>
+            <td align="center">0000000</td>
+            <td align="center">重庆</td>
+        </tr>
+        <tr>
+            <td align="center">张四</td>
+            <td align="center">20100002</td>
+            <td align="center">男</td>
+            <td align="center">23</td>
+            <td align="center">0000001</td>
+            <td align="center">成都</td>
+        </tr>
+        <tr>
+            <td align="center">张五</td>
+            <td align="center">20100003</td>
+            <td align="center">男</td>
+            <td align="center">21</td>
+            <td align="center">0000002</td>
+            <td align="center">上海</td>
+        </tr>
+        <tr>
+            <td align="center">张六</td>
+            <td align="center">20100004</td>
+            <td align="center">女</td>
+            <td align="center">24</td>
+            <td align="center">0000004</td>
+            <td align="center">济南</td>
+        </tr>
+        <tr>
+            <td align="center">张七</td>
+            <td align="center">20100005</td>
+            <td align="center">女</td>
+            <td align="center">22</td>
+            <td align="center">0000006</td>
+            <td align="center">重庆</td>
+        </tr>
+        <tr>
+            <td align="center">张八</td>
+            <td align="center">20100006</td>
+            <td align="center">男</td>
+            <td align="center">25</td>
+            <td align="center">0000012</td>
+            <td align="center">上海</td>
+        </tr>
+    </table>
+</div>
+</body>
+
+</html>

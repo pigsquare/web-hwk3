@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh">
+<head>
+    <title>照片浏览器</title>
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+        var j=1;
+        // 前进后退
+        function theNext() {
+            j++;
+            if(j==6){
+                window.alert("已经是最后一张。");
+                clearInterval(timerId);
+                j=5;
+            }
+            var source = "photo"+j+".jpg";
+            var placeholder = document.getElementById("myimage");
+            placeholder.setAttribute("src",source);
+        }
+        function theLast() {
+            j--;
+            if(j==0){
+                window.alert("已经是第一张。");
+                j=1;
+            }
+            var source = "photo"+j+".jpg";
+            var placeholder = document.getElementById("myimage");
+            placeholder.setAttribute("src",source);
+        }
+        // 切换图片
+        function selPic(i) {
+            var source = "photo"+i+".jpg";
+            var placeholder = document.getElementById("myimage");
+            placeholder.setAttribute("src",source);
+        }
+        // 自动切换
+        var timerId;
+        function autoChange() {
+            timerId=setInterval("theNext()",2000);
+        }
+        function stopChange() {
+            clearInterval(timerId);
+        }
+    </script>
+</head>
+<body>
+<h1 id="title">The Browser 照片浏览</h1>
+<div id="img">
+    <p>
+        <img src="photo1.jpg" id="myimage" width="600" height="400" onclick="theNext()" alt="照片"></img>
+    </p>
+    <form action="album.xhtml">
+        <input type="button" value="下一张" onclick="theNext()"/>
+        <input type="button" value="上一张" onclick="theLast()"/>
+        <input type="button" value="自动切换" onclick="autoChange()"/>
+        <input type="button" value="停止切换" onclick="stopChange()"/>
+    </form>
+</div>
+
+<p class="smallPic">
+    <img id="p1" src="photo1.jpg" onclick="selPic(1)" width="120" height="80" alt="p1"/>
+    <img id="p2" src="photo2.jpg" onclick="selPic(2)" width="120" height="80" alt="p2"/>
+    <img id="p3" src="photo3.jpg" onclick="selPic(3)" width="120" height="80" alt="p3"/>
+    <img id="Img1" src="photo4.jpg" onclick="selPic(4)" width="120" height="80" alt="p4"/>
+    <img id="Img2" src="photo5.jpg" onclick="selPic(5)" width="120" height="80" alt="p5"/>
+</p>
+</body>
+</html>
